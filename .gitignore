@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/qt,qtcreator
 # Edit at https://www.toptal.com/developers/gitignore?templates=qt,qtcreator
 
 ### Qt ###
+=======
+>>>>>>> main
 # C++ objects and libs
 *.slo
 *.lo
@@ -56,6 +59,7 @@ compile_commands.json
 *creator.user*
 
 *_qmlcache.qrc
+<<<<<<< HEAD
 
 ### QtCreator ###
 # gitignore for Qt Creator like IDE for pure C/C++ project without Qt
@@ -90,3 +94,5 @@ compile_commands.json
 
 
 # End of https://www.toptal.com/developers/gitignore/api/qt,qtcreator
+=======
+>>>>>>> main
