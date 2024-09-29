@@ -1,4 +1,4 @@
-#include "generatingthread.h"
+#include "./header/generatingthread.h"
 #include <QThread>
 
 GeneratingThread::GeneratingThread() : number(0), running(true) {}
@@ -9,7 +9,6 @@ void GeneratingThread::run() {
         QMutexLocker locker(&mutex);
         number++;
         emit newNumberGenerated(number);
-        locker.unlock();
         QThread::msleep(300);
     }
 }

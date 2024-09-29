@@ -1,7 +1,8 @@
-#include "mainwindow.h"
+#include "./header/mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <QTimer>
+#include <QCloseEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,16 +28,18 @@ MainWindow::~MainWindow()
 {
     if (generatingThread->isRunning()) {
         generatingThread->stop();
+        generatingThread->terminate();
         generatingThread->wait();
     }
 
     if (dequeueThread->isRunning()) {
         dequeueThread->stop();
+        generatingThread->terminate();
         dequeueThread->wait();
     }
 
     if (queueThread->isRunning()) {
-        queueThread->quit();
+        queueThread->terminate();
         queueThread->wait();
     }
 
@@ -44,14 +47,16 @@ MainWindow::~MainWindow()
     delete queueThread;
     delete generatingThread;
     delete ui;
+
+    qDebug() << "Deleted all threads";
 }
 
 void MainWindow::genThreadToggle() {
-    ui->genButton->setText("Stop");
+    ui->genButton->setText("Stop 1 thread");
     if (generatingThread->isRunning()) {
         generatingThread->stop();
         generatingThread->wait();
-        ui->genButton->setText("Start");
+        ui->genButton->setText("Start 1 thread");
     }
     else {
         generatingThread->start();
@@ -59,11 +64,11 @@ void MainWindow::genThreadToggle() {
 }
 
 void MainWindow::deqThreadToggle() {
-    ui->deqButton->setText("Stop");
+    ui->deqButton->setText("Stop 3 thread");
     if (dequeueThread->isRunning()) {
         dequeueThread->stop();
         dequeueThread->wait();
-        ui->deqButton->setText("Start");
+        ui->deqButton->setText("Start 3 thread");
     }
     else {
         dequeueThread->start();
@@ -84,5 +89,4 @@ void MainWindow::updateQueueList(const QList<quint16> &queue) {
 void MainWindow::updateDequeuedList(quint16 newNumber) {
     ui->dequeueListWidget->addItem(QString::number(newNumber));
 }
-
 
