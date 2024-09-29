@@ -1,8 +1,8 @@
-#include "dequeuethread.h"
+#include "./header/dequeuethread.h"
 #include "qdebug.h"
 
 DequeueThread::DequeueThread(QueueThread *qThread)
-    : running(true), queue(qThread) {}
+    : running(true), m_number(0), queue(qThread) {}
 
 void DequeueThread::run(){
     running = true;
@@ -12,7 +12,6 @@ void DequeueThread::run(){
             emit addNewNumber(m_number);
             m_number = 0;
         }
-        locker.unlock();
     }
 }
 
@@ -23,5 +22,4 @@ void DequeueThread::stop() {
 void DequeueThread::getNumber(quint16 number) {
     QMutexLocker locker(&mutex);
     m_number = number;
-    qDebug() << number;
 }

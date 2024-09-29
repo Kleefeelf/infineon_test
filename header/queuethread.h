@@ -3,10 +3,11 @@
 
 #include "generatingthread.h"
 #include <QQueue>
-#include <qthread.h>
+#include <QThread>
 
 class QueueThread: public QThread {
     Q_OBJECT
+    Q_DISABLE_COPY_MOVE(QueueThread)
 public:
     QueueThread(GeneratingThread *genThread);
     void run() override;

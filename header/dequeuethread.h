@@ -2,11 +2,10 @@
 #define  DequeueETHREAD_H
 
 #include "queuethread.h"
-#include <QMutex>
-#include <qthread.h>
 
 class DequeueThread: public QThread {
     Q_OBJECT
+    Q_DISABLE_COPY_MOVE(DequeueThread)
 public:
     DequeueThread(QueueThread *queueThread);
     void run() override;

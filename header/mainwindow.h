@@ -1,9 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "queuethread.h"
-#include "generatingthread.h"
 #include "dequeuethread.h"
+#include <QApplication>
 #include <QMainWindow>
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,13 +17,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
 private slots:
     void genThreadToggle();
     void deqThreadToggle();
     void updateGenList(quint16 newNumber);
     void updateQueueList(const QList<quint16> &queue);
-    void updateDequeuedList(quint16 newNumber); // список всіх хто вийшов з черги
+    void updateDequeuedList(quint16 newNumber); // list of every number that was dequeued
 private:
     Ui::MainWindow *ui;
     GeneratingThread *generatingThread;
